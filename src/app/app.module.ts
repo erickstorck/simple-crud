@@ -6,6 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main.component';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+const MATERIAL_MODULES = [
+  MatButtonModule,
+  MatIconModule,
+  MatSidenavModule
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +23,8 @@ import { MainComponent } from './components/main.component';
   imports: [
     BrowserModule,
     MainModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MATERIAL_MODULES
   ],
   providers: [],
   bootstrap: [AppComponent]
