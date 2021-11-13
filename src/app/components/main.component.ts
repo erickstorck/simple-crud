@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MatDialog } from '@angular/material/dialog';
+import { NewClientComponent } from './new-client/new-client.component';
 
 @Component({
   selector: 'app-main',
@@ -23,6 +25,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     private router: Router,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -39,36 +42,20 @@ export class MainComponent implements OnInit {
     console.log('clicked: ', id)
     let element = document.querySelector(`#${id}`);
     element.classList.toggle('standby');
+
+    const alertModal = this.dialog.open(NewClientComponent, {
+      disableClose: false,
+      data: {},
+      panelClass: 'new-client-container'
+    });
+
+    alertModal.afterClosed().subscribe(res => {
+      element.classList.toggle('standby');
+    })
   }
 
-  openSideMenu(toggle = true) {
-    console.log('ok')
-    if (toggle) this.sidenav.toggle()
-    let selected = sessionStorage.getItem('selected')
-    let elements = document.getElementsByClassName('selected')
-    for (let index = 0; index < elements.length; index++) {
-      elements[index].classList.remove('selected')
-    }
-    if (selected) document.getElementById(selected).classList.add('selected')
-  }
+  openClientList(id) {
 
-  goToHeaders(route) {
-    let elements = document.getElementsByClassName('selected')
-    for (let index = 0; index < elements.length; index++) {
-      elements[index].classList.remove('selected')
-    }
-    sessionStorage.removeItem('selected')
-    this.router.navigate([route]);
-  }
-
-  goTo(route) {
-    sessionStorage.setItem('selected', route == 'ks' ? 'ks/home' : route)
-    this.openSideMenu(route == 'ks' ? false : true)
-    this.router.navigate([route]);
-  }
-
-  logout() {
-    // this.authService.doLogout();
   }
 
 }

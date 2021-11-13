@@ -9,16 +9,19 @@ import { MainComponent } from './components/main.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 const MATERIAL_MODULES = [
   MatButtonModule,
   MatIconModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatDialogModule
 ];
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
   ],
   imports: [
     BrowserModule,
