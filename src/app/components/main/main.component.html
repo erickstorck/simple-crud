@@ -1,14 +1,24 @@
 <div class='main-container'>
     <button id='newClient' class='crud-button' (mousedown)='toggleClass("newClient")'
-        (mouseup)='toggleClass("newClient")' (click)='openNewClient("newClient")'>NEW CLIENT</button>
+        (mouseup)='toggleClass("newClient")' (click)='openNewClient()'>NEW CLIENT</button>
     <button id='clientList' class='crud-button' (mousedown)='toggleClass("clientList")'
         (mouseup)='toggleClass("clientList")' (click)='openClientList("clientList")'>CLIENT LIST</button>
 </div>
 <style>
-    .standby {
-        margin-left: 80%;
-        margin-bottom: 20%;
-        pointer-events: none;
+    .hideRight {
+        margin-left: 200%;
+    }
+
+    .hideLeft {
+        margin-right: 200%;
+    }
+
+    .hideBottom {
+        margin-top: 200%;
+    }
+
+    .hideTop {
+        margin-bottom: 200%;
     }
 
     .clicked {
@@ -43,5 +53,6 @@
         background-image: radial-gradient(circle, #272838, #222334, #1d1e2f, #191a2b, #141527);
         align-items: center;
         justify-content: center;
+        overflow: hidden;
     }
 </style>

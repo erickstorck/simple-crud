@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
-import { NewClientComponent } from './new-client/new-client.component';
-import { MainService } from './main.service';
+import { NewClientComponent } from '../new-client/new-client.component';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-main',
@@ -25,16 +25,11 @@ export class MainComponent implements OnInit {
   showFiller = false;
 
   constructor(
-    private router: Router,
     public dialog: MatDialog,
-    private mainService: MainService
   ) { }
 
   ngOnInit(): void {
-    this.mainService.get_vehicle().subscribe({
-      next: v => console.log('vehicle data: ', v),
-      error: e => console.log('error: ', e)
-    })
+
   }
 
   toggleClass(id) {
@@ -42,10 +37,11 @@ export class MainComponent implements OnInit {
     element.classList.toggle('clicked');
   }
 
-  openNewClient(id) {
-    console.log('clicked: ', id)
-    let element = document.querySelector(`#${id}`);
-    element.classList.toggle('standby');
+  openNewClient() {
+    let newClient = document.querySelector('#newClient');
+    let clientList = document.querySelector('#clientList');
+    newClient.classList.toggle('hideRight');
+    clientList.classList.toggle('hideLeft');
 
     const alertModal = this.dialog.open(NewClientComponent, {
       disableClose: false,
@@ -54,12 +50,16 @@ export class MainComponent implements OnInit {
     });
 
     alertModal.afterClosed().subscribe(res => {
-      element.classList.toggle('standby');
+      newClient.classList.toggle('hideRight');
+      clientList.classList.toggle('hideLeft');
     })
   }
 
   openClientList(id) {
-
+    let newClient = document.querySelector('#newClient');
+    let clientList = document.querySelector('#clientList');
+    newClient.classList.toggle('hideTop');
+    clientList.classList.toggle('hideBottom');
   }
 
 }

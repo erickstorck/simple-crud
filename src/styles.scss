@@ -1,8 +1,14 @@
 
 @import './theme.scss';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+    height: 100%; 
+}
+body { 
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    overflow: hidden;
+}
 
 .new-client-container {
     position: absolute !important;
@@ -12,17 +18,45 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 0px;
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 10px 0 rgb(21 22 40);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    border-right: 2px solid ghostwhite;
+    border-bottom: 2px solid ghostwhite;
+    border-top: 2px solid ghostwhite;
+    background: transparent;
+}
+
+.mat-hint {
+    color: ghostwhite !important;
+}
+
+.mat-input-element {
+    color: ghostwhite !important;
 }
 
 .mat-raised-button {
     border-radius: 0 !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mat-button-wrapper {
+    overflow: hidden;
 }
 
 .mat-dialog-container {
     background: transparent;
+    box-shadow: 0 0 0 0 !important;
 }
+
+.mat-menu-panel {
+    max-height: 300px !important;
+    border-radius: 0px !important;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 10px 0 rgb(21 22 40);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+::placeholder {
+    color: ghostwhite !important;
+ }
+

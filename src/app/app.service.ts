@@ -13,9 +13,12 @@ export class AppService {
         public router: Router
     ) { }
 
-    get_vehicle() {
-        console.log('get')
+    get_brands() {
         return this.http.get<any[]>(`https://parallelum.com.br/fipe/api/v1/carros/marcas`)
+    }
+
+    get_models(cod) {
+        return this.http.get<any[]>(`https://parallelum.com.br/fipe/api/v1/carros/marcas/${cod}/modelos`)
     }
 
 }

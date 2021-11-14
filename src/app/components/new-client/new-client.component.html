@@ -1,10 +1,10 @@
 <div class="container">
-    <h1 mat-dialog-title>NEW REGISTER</h1>
+    <h1 style="color:ghostwhite" mat-dialog-title>NEW REGISTER</h1>
     <div mat-dialog-content>
-        <form class="example-form">
+        <form class="form-container">
             <!-- NOME -->
-            <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-label style="color:ghostwhite">Name</mat-label>
                 <input type="text" matInput [formControl]="name" [errorStateMatcher]="matcher">
                 <mat-icon matSuffix>person</mat-icon>
                 <mat-error *ngIf="name.hasError('required')">
@@ -12,12 +12,11 @@
                 </mat-error>
             </mat-form-field>
             <!-- CPF -->
-            <mat-form-field appearance="fill">
-                <mat-label>CPF</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-label style="color:ghostwhite">CPF</mat-label>
                 <input mask='000.000.000-00' type="text" matInput [formControl]="cpf" [errorStateMatcher]="matcher"
                     placeholder="Ex.: 012.345.678-90">
                 <mat-icon matSuffix>badge</mat-icon>
-                <!-- <mat-hint>Email validation on</mat-hint> -->
                 <mat-error *ngIf="cpf.hasError('required')">
                     CPF is <strong>required</strong>
                 </mat-error>
@@ -26,54 +25,52 @@
                 </mat-error>
             </mat-form-field>
             <!-- TELEFONE -->
-            <mat-form-field appearance="fill">
-                <mat-label>Cellphone number</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-label style="color:ghostwhite">Cellphone number</mat-label>
                 <input mask='(00) 00000-0000' type="text" matInput [formControl]="cellphone"
                     [errorStateMatcher]="matcher" placeholder="Ex.: (51) 99986-8750">
                 <mat-icon matSuffix>call</mat-icon>
-                <!-- <mat-hint>Email validation on</mat-hint> -->
                 <mat-error *ngIf="cellphone.hasError('required')">
                     Cellphone number is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
             <!-- DATE -->
-            <mat-form-field appearance="fill">
-                <mat-label>Birthdate</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-label style="color:ghostwhite">Birthdate</mat-label>
                 <input mask='00/00/0000' type="text" matInput [formControl]="birthdate" [errorStateMatcher]="matcher"
-                    placeholder="Ex.: 26/09/1993">
+                    placeholder="Ex.: dd/mm/yyyy">
                 <mat-icon matSuffix>cake</mat-icon>
-                <mat-hint>pt-BR format: mm/dd/yyyy</mat-hint>
                 <mat-error *ngIf="birthdate.hasError('required')">
                     Birthdate is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
             <!-- END -->
-            <mat-form-field appearance="fill">
-                <mat-label>Address</mat-label>
-                <input type="text" matInput [formControl]="address" [errorStateMatcher]="matcher"
-                    placeholder="Ex.: Sen. Salgado Filho - Esteio/RS">
+            <mat-form-field appearance="outline">
+                <mat-label style="color:ghostwhite">Address</mat-label>
+                <input type="text" matInput [formControl]="address" [errorStateMatcher]="matcher">
                 <mat-icon matSuffix>home</mat-icon>
-                <!-- <mat-hint>Email validation on</mat-hint> -->
                 <mat-error *ngIf="address.hasError('required')">
                     Address is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
             <!-- VEIC -->
-            <mat-form-field appearance="fill">
-                <mat-label>Vehicle</mat-label>
-                <input type="text" matInput [formControl]="vehicle" [errorStateMatcher]="matcher"
-                    placeholder="Ex.: erickstorck@gmail.com">
-                <mat-icon matSuffix>drive_eta</mat-icon>
-                <!-- <mat-hint>Email validation on</mat-hint> -->
-                <mat-error *ngIf="vehicle.hasError('required')">
-                    Vehicle is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
+            <button mat-button [matMenuTriggerFor]="brandsMenu">{{selectedVehicle}}</button>
+            <mat-menu class='mat-menu-panel' #brandsMenu="matMenu">
+                <div class='mat-menu-item' *ngFor='let brand of brands'
+                    (click)="brandSelected($event, brand['codigo'], brand['nome'])" [matMenuTriggerFor]="modelsMenu">
+                    {{brand['nome']}}</div>
+            </mat-menu>
+            <mat-menu #modelsMenu="matMenu">
+                <button *ngFor="let model of models['modelos']" (click)="vehicleSelected(model['nome'])"
+                    mat-menu-item>{{model['nome']}}</button>
+            </mat-menu>
         </form>
     </div>
     <div mat-dialog-actions class='new-client-actions'>
-        <button mat-raised-button color='warn' (click)='dialogRef.close()'>Cancel</button>
-        <button mat-raised-button color='primary' [disabled]="name.invalid" (click)='send()'>Send</button>
+        <button mat-raised-button color='warn' (click)='dialogRef.close()'>CANCEL</button>
+        <button mat-raised-button color='primary'
+            [disabled]="name.invalid || cpf.invalid || cellphone.invalid || birthdate.invalid || address.invalid || vehicle.invalid"
+            (click)='send()'>DO!</button>
     </div>
 </div>
 <style>
@@ -87,5 +84,11 @@
         display: flex;
         flex-direction: column;
         grid-gap: 20px;
+    }
+
+    .form-container {
+        color: ghostwhite;
+        display: flex;
+        flex-direction: column;
     }
 </style>

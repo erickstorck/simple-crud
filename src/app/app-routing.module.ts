@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainService } from './components/main.service';
+import { AppService } from './app.service';
+import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./components/main.module').then(m => m.MainModule) },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
+  { path: 'main', component: MainComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [
-    MainService
-  ]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
