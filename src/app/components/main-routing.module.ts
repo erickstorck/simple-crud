@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
+import { MainService } from './main.service';
 
 const routes: Routes = [
     { path: '', redirectTo: '/clients', pathMatch: 'full' },
@@ -17,6 +18,9 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes)
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [
+        MainService
+    ]
 })
 export class MainRoutingModule { }

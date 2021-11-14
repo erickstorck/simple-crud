@@ -1,14 +1,91 @@
-<h1 mat-dialog-title>NEW REGISTER</h1>
-<div mat-dialog-content>
-    USER DETAILS
-    <input mat-input type="text">
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)='close()'>Close</button>
+<div class="container">
+    <h1 mat-dialog-title>NEW REGISTER</h1>
+    <div mat-dialog-content>
+        <form class="example-form">
+            <!-- NOME -->
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput [formControl]="name" [errorStateMatcher]="matcher">
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="name.hasError('required')">
+                    Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <!-- CPF -->
+            <mat-form-field appearance="fill">
+                <mat-label>CPF</mat-label>
+                <input mask='000.000.000-00' type="text" matInput [formControl]="cpf" [errorStateMatcher]="matcher"
+                    placeholder="Ex.: 012.345.678-90">
+                <mat-icon matSuffix>badge</mat-icon>
+                <!-- <mat-hint>Email validation on</mat-hint> -->
+                <mat-error *ngIf="cpf.hasError('required')">
+                    CPF is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="cpf.hasError('cpfNotValid') && !cpf.hasError('required')">
+                    Please enter a valid cpf
+                </mat-error>
+            </mat-form-field>
+            <!-- TELEFONE -->
+            <mat-form-field appearance="fill">
+                <mat-label>Cellphone number</mat-label>
+                <input mask='(00) 00000-0000' type="text" matInput [formControl]="cellphone"
+                    [errorStateMatcher]="matcher" placeholder="Ex.: (51) 99986-8750">
+                <mat-icon matSuffix>call</mat-icon>
+                <!-- <mat-hint>Email validation on</mat-hint> -->
+                <mat-error *ngIf="cellphone.hasError('required')">
+                    Cellphone number is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <!-- DATE -->
+            <mat-form-field appearance="fill">
+                <mat-label>Birthdate</mat-label>
+                <input mask='00/00/0000' type="text" matInput [formControl]="birthdate" [errorStateMatcher]="matcher"
+                    placeholder="Ex.: 26/09/1993">
+                <mat-icon matSuffix>cake</mat-icon>
+                <mat-hint>pt-BR format: mm/dd/yyyy</mat-hint>
+                <mat-error *ngIf="birthdate.hasError('required')">
+                    Birthdate is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <!-- END -->
+            <mat-form-field appearance="fill">
+                <mat-label>Address</mat-label>
+                <input type="text" matInput [formControl]="address" [errorStateMatcher]="matcher"
+                    placeholder="Ex.: Sen. Salgado Filho - Esteio/RS">
+                <mat-icon matSuffix>home</mat-icon>
+                <!-- <mat-hint>Email validation on</mat-hint> -->
+                <mat-error *ngIf="address.hasError('required')">
+                    Address is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <!-- VEIC -->
+            <mat-form-field appearance="fill">
+                <mat-label>Vehicle</mat-label>
+                <input type="text" matInput [formControl]="vehicle" [errorStateMatcher]="matcher"
+                    placeholder="Ex.: erickstorck@gmail.com">
+                <mat-icon matSuffix>drive_eta</mat-icon>
+                <!-- <mat-hint>Email validation on</mat-hint> -->
+                <mat-error *ngIf="vehicle.hasError('required')">
+                    Vehicle is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </form>
+    </div>
+    <div mat-dialog-actions class='new-client-actions'>
+        <button mat-raised-button color='warn' (click)='dialogRef.close()'>Cancel</button>
+        <button mat-raised-button color='primary' [disabled]="name.invalid" (click)='send()'>Send</button>
+    </div>
 </div>
 <style>
-    /* .new-client-container {
-        width: 500px;
-        height: 700px;
-    } */
+    .new-client-actions {
+        display: flex;
+        grid-gap: 20px;
+        justify-content: flex-end;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 20px;
+    }
 </style>

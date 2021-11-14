@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
 import { NewClientComponent } from './new-client/new-client.component';
+import { MainService } from './main.service';
 
 @Component({
   selector: 'app-main',
@@ -26,14 +27,17 @@ export class MainComponent implements OnInit {
   constructor(
     private router: Router,
     public dialog: MatDialog,
+    private mainService: MainService
   ) { }
 
   ngOnInit(): void {
-
+    this.mainService.get_vehicle().subscribe({
+      next: v => console.log('vehicle data: ', v),
+      error: e => console.log('error: ', e)
+    })
   }
 
   toggleClass(id) {
-    console.log('clicked: ', id)
     let element = document.querySelector(`#${id}`);
     element.classList.toggle('clicked');
   }

@@ -1,16 +1,28 @@
+
+@import './theme.scss';
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .new-client-container {
     position: absolute !important;
+    display: flex;
     width: 500px;
-    height: 200px;
+    /* height: 200px; */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 0px;
     background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 10px 0 rgb(21 22 40);
-    backdrop-filter: blur(4 px);
+    backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+}
+
+.mat-raised-button {
+    border-radius: 0 !important;
+}
+
+.mat-dialog-container {
+    background: transparent;
 }

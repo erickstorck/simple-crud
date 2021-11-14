@@ -1,0 +1,89 @@
+@import "../node_modules/@angular/material/theming";
+@include mat-core();
+
+$simple-crud-light-primary: (
+    500 : #26a16f,
+    contrast: (
+        A200 : #000000,
+        A400 : #000000,
+    )
+);
+
+$simple-crud-light-secondary: (
+    500 : #26a16f,
+    contrast: (
+        A400 : #000000,
+    )
+);
+
+$simple-crud-light-red: (
+    500 : #df4141,
+    contrast: (
+        A400 : #000000,
+    )
+);
+
+$simple-crud-dark-primary: (
+
+    A200 : #25e9ff,
+    contrast: (
+        500 : #ffffff,
+    )
+);
+
+$simple-crud-dark-secondary: (
+    A400 : #D2D904,
+    contrast: (
+        500 : #ffffff,
+    )
+);
+
+$simple-crud-dark-red: (
+    500 : #ff4747,
+    contrast: (
+        A400 : #000000,
+    )
+);
+
+
+
+// Light theme
+$simple-crud-app-light-primary: mat-palette($simple-crud-light-primary, 500);
+$simple-crud-app-light-accent:  mat-palette($simple-crud-light-secondary, 500, A400);
+$simple-crud-app-light-warn:    mat-palette($simple-crud-light-red, 500);
+
+
+$simple-crud-app-light-theme: mat-light-theme((
+  color: (
+    primary: $simple-crud-app-light-primary,
+    accent: $simple-crud-app-light-accent,
+    warn: $simple-crud-app-light-warn
+  )
+));
+
+@include angular-material-theme($simple-crud-app-light-theme);
+// @include component-themes($simple-crud-app-light-theme);
+.simple-crud-icon-color {
+  color: mat-color($simple-crud-app-light-accent)!important;
+}
+
+// Dark theme
+$simple-crud-app-dark-primary: mat-palette($simple-crud-dark-primary, A200);
+$simple-crud-app-dark-accent:  mat-palette($simple-crud-dark-secondary, A400, 500);
+$simple-crud-app-dark-warn:    mat-palette($simple-crud-dark-red, 500);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as `color` or `typography`.
+$simple-crud-app-dark-theme: mat-dark-theme((
+  color: (
+    primary: $simple-crud-app-dark-primary,
+    accent: $simple-crud-app-dark-accent,
+    warn: $simple-crud-app-dark-warn
+  )
+));
+
+.simple-crud-dark-theme {
+  @include angular-material-color($simple-crud-app-dark-theme);
+}
+
+
