@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 style="color:ghostwhite" mat-dialog-title>NEW REGISTER</h1>
+    <h1 style="color:ghostwhite" mat-dialog-title>{{crudTitle[crudType]}}</h1>
     <div mat-dialog-content>
         <form class="form-container">
             <!-- NOME -->
@@ -66,29 +66,13 @@
             </mat-menu>
         </form>
     </div>
-    <div mat-dialog-actions class='new-client-actions'>
-        <button mat-raised-button color='warn' (click)='dialogRef.close()'>CANCEL</button>
-        <button mat-raised-button color='primary'
-            [disabled]="name.invalid || cpf.invalid || cellphone.invalid || birthdate.invalid || address.invalid || vehicle.invalid"
-            (click)='send()'>DO!</button>
+    <div mat-dialog-actions class='client-crud-actions'>
+        <button mat-raised-button *ngIf='crudType == "edit"' color='warn' (click)='deleteClient()'>DELETE</button>
+        <div class='main-actions'>
+            <button mat-raised-button color='accent' (click)='dialogRef.close()'>CANCEL</button>
+            <button mat-raised-button color='primary'
+                [disabled]="name.invalid || cpf.invalid || cellphone.invalid || birthdate.invalid || address.invalid || vehicle.invalid"
+                (click)='send()'>{{crudSend[crudType]}}</button>
+        </div>
     </div>
 </div>
-<style>
-    .new-client-actions {
-        display: flex;
-        grid-gap: 20px;
-        justify-content: flex-end;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        grid-gap: 20px;
-    }
-
-    .form-container {
-        color: ghostwhite;
-        display: flex;
-        flex-direction: column;
-    }
-</style>

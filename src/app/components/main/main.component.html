@@ -1,58 +1,8 @@
+<div class='signature'>Erick Storck - Simple crud with local storage -
+    erickstorck@gmail.com</div>
 <div class='main-container'>
-    <button id='newClient' class='crud-button' (mousedown)='toggleClass("newClient")'
-        (mouseup)='toggleClass("newClient")' (click)='openNewClient()'>NEW CLIENT</button>
+    <button id='ClientCrud' class='crud-button' (mousedown)='toggleClass("ClientCrud")'
+        (mouseup)='toggleClass("ClientCrud")' (click)='openClientCrud()'>NEW CLIENT</button>
     <button id='clientList' class='crud-button' (mousedown)='toggleClass("clientList")'
-        (mouseup)='toggleClass("clientList")' (click)='openClientList("clientList")'>CLIENT LIST</button>
+        (mouseup)='toggleClass("clientList")' (click)='openClientList()'>CLIENT LIST</button>
 </div>
-<style>
-    .hideRight {
-        margin-left: 200%;
-    }
-
-    .hideLeft {
-        margin-right: 200%;
-    }
-
-    .hideBottom {
-        margin-top: 200%;
-    }
-
-    .hideTop {
-        margin-bottom: 200%;
-    }
-
-    .clicked {
-        transform: scale(.99);
-        background: rgba(255, 255, 255, 0.75);
-    }
-
-    .crud-button:hover {
-        box-shadow: 0 4px 8px 0 rgb(21 22 40);
-    }
-
-    .crud-button {
-        margin-top: 20px;
-        width: 200px;
-        height: 50px;
-        border: 0px;
-        background: rgba(255, 255, 255, 0.25);
-        box-shadow: 0 8px 10px 0 rgb(21 22 40);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        color: ghostwhite;
-        font-family: 'Muli';
-        cursor: pointer;
-        transition: margin .5s;
-    }
-
-    .main-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        background-image: radial-gradient(circle, #272838, #222334, #1d1e2f, #191a2b, #141527);
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-</style>

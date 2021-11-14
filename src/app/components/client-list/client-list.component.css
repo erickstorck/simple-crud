@@ -1,0 +1,21 @@
+.client-list {
+    text-align: center;
+    overflow: auto;
+    max-height: 500px;
+}
+
+.client-item {
+    color: ghostwhite;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 20px;
+}
+
+.form-container {
+    color: ghostwhite;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,12 @@
+<div class="container">
+    <h1 style="color:ghostwhite" mat-dialog-title>CLIENT LIST</h1>
+    <mat-selection-list class='client-list' [multiple]="false">
+        <mat-list-option [id]="client['id']" class='client-item' *ngFor="let client of clients" [value]="client['name']"
+            (click)="clientSelected(client['id'])">
+            {{client['name']}}
+        </mat-list-option>
+    </mat-selection-list>
+    <div style='color: ghostwhite;' *ngIf='clients.length == 0'>
+        Empty
+    </div>
+</div>

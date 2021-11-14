@@ -15,10 +15,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { AppService } from './app.service';
-import { NewClientComponent } from './components/new-client/new-client.component';
+import { ClientCrudComponent } from './components/client-crud/client-crud.component';
 import { CommonModule } from '@angular/common';
+import { ClientListComponent } from './components/client-list/client-list.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -29,7 +31,8 @@ const MATERIAL_MODULES = [
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatMenuModule
+  MatMenuModule,
+  MatListModule
 ];
 
 
@@ -37,7 +40,8 @@ const MATERIAL_MODULES = [
   declarations: [
     AppComponent,
     MainComponent,
-    NewClientComponent
+    ClientCrudComponent,
+    ClientListComponent
   ],
   imports: [
     CommonModule,

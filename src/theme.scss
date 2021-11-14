@@ -10,7 +10,7 @@ $simple-crud-light-primary: (
 );
 
 $simple-crud-light-secondary: (
-    500 : #26a16f,
+    500 : #2684a1,
     contrast: (
         A400 : #000000,
     )
@@ -60,6 +60,27 @@ $simple-crud-app-light-theme: mat-light-theme((
     warn: $simple-crud-app-light-warn
   )
 ));
+
+.on-scrollbar {
+  scrollbar-width: thin;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+.on-scrollbar::-webkit-scrollbar-track {
+  -webkit-box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.on-scrollbar::-webkit-scrollbar {
+  width: 10px !important;
+  background-color: transparent;
+}
+
+.on-scrollbar::-webkit-scrollbar-thumb {
+  background-color: mat-color($simple-crud-app-light-accent);
+}
 
 @include angular-material-theme($simple-crud-app-light-theme);
 // @include component-themes($simple-crud-app-light-theme);
