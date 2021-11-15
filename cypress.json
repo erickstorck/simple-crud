@@ -1,0 +1,6 @@
+{
+    "baseURL": "http://localhost:4200",
+    "integrationFolder": "tests",
+    "viewportWidth": 1366,
+    "viewportHeight": 768
+}

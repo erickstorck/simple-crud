@@ -105,8 +105,10 @@ export class ClientCrudComponent implements OnInit {
   }
 
   vehicleSelected(model) {
-    this.vehicle.setValue(`${this.brand} ${model}`)
-    this.selectedVehicle = `${this.brand} ${model}`
+    if (model != 'Loading') {
+      this.vehicle.setValue(`${this.brand} ${model}`)
+      this.selectedVehicle = `${this.brand} ${model}`
+    }
   }
 
   send() {
