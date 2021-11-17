@@ -23,14 +23,13 @@ export interface Client {
 })
 export class ClientCrudComponent implements OnInit {
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-
   name = new FormControl('', [Validators.required]);
   cpf = new FormControl('', [Validators.required, CPFValidator.isValidCpf()]);
   cellphone = new FormControl('', [Validators.required]);
   birthdate = new FormControl('', [Validators.required]);
   address = new FormControl('', [Validators.required]);
   vehicle = new FormControl('', [Validators.required]);
+  id = new FormControl('', [Validators.required])
 
   selectedVehicle = 'Vehicle Selector'
   brand = ''
@@ -80,8 +79,7 @@ export class ClientCrudComponent implements OnInit {
     console.log('clientList: ', this.clientList)
     this.mainService.get_brands().subscribe({
       next: v => this.brands = v,
-      error: e => console.log('error: ', e),
-      complete: () => console.log('brands: ', this.brands)
+      error: e => console.log('error: ', e)
     })
   }
 
@@ -93,8 +91,7 @@ export class ClientCrudComponent implements OnInit {
     this.models = { modelos: [{ nome: 'Loading' }] }
     this.mainService.get_models(cod).subscribe({
       next: v => this.models = v,
-      error: e => console.log('error: ', e),
-      complete: () => console.log('models: ', this.models)
+      error: e => console.log('error: ', e)
     })
   }
 
@@ -116,19 +113,25 @@ export class ClientCrudComponent implements OnInit {
       this.clientList = this.clientList.filter(f => f['id'] != this.data['client']['id'])
     }
 
-    let client = {
-      name: this.name.value,
-      cpf: this.cpf.value,
-      cellphone: this.cellphone.value,
-      birthdate: this.birthdate.value,
-      address: this.address.value,
-      vehicle: this.vehicle.value,
-      id: this.crudType == 'new' ? UUIDGenerator.generateUUID() : this.data['client']['id']
-    }
+    this.id.setValue(this.crudType == 'new' ? UUIDGenerator.generateUUID() : this.data['client']['id'])
 
-    this.clientList.push(client)
-    localStorage.setItem('clientList', JSON.stringify(this.clientList))
-    this.close()
+    if (this.name.valid && this.cpf.valid && this.cellphone.valid && this.birthdate.valid && this.address.valid && this.vehicle.valid && this.id.valid) {
+      let client = {
+        name: this.name.value,
+        cpf: this.cpf.value,
+        cellphone: this.cellphone.value,
+        birthdate: this.birthdate.value,
+        address: this.address.value,
+        vehicle: this.vehicle.value,
+        id: this.id.value
+      }
+
+      this.clientList.push(client)
+      localStorage.setItem('clientList', JSON.stringify(this.clientList))
+      this.close()
+    } else {
+      throw new Error("Invalid Input");
+    }
   }
 
   deleteClient() {
