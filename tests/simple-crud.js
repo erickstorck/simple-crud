@@ -7,7 +7,8 @@ describe('simple use', () => {
         cellphone: '51999868750',
         birthdate: '26091993',
         address: 'client address',
-        vehicle: 'Acura Integra GS 1.8'
+        vehicle: 'Acura Integra GS 1.8',
+        id: '13a49c34-070a-4f80-87f7-fc8466d5809e'
     }]
 
     const crudFiller = (mainElement, errorElement, text, test, error, mask) => {
@@ -67,10 +68,13 @@ describe('simple use', () => {
         cy.get('#birthdate').should('have.value', '26/09/1993')
         cy.get('#address').should('have.value', 'client address')
         cy.get('#vehicle').should('have.text', 'Acura Integra GS 1.8')
+        cy.wait(1000)
         cy.get('#send').click()
+        cy.wait(1000)
         cy.get(':nth-child(1) > .mat-list-item-content > .mat-list-text').should('have.text', ' update test ')
         cy.get(':nth-child(1) > .mat-list-item-content > .mat-list-text').click()
         cy.get('#delete').click()
+        cy.wait(1000)
         cy.get('#empty-list').should('have.text', ' Empty ')
     })
 })

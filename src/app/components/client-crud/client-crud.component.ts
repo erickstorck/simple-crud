@@ -1,6 +1,6 @@
 import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomErrorStateMatcher } from '../classes/error-matcher';
 import { CPFValidator } from '../classes/cpf-validator'
 import { AppService } from '../../app.service';
@@ -23,13 +23,15 @@ export interface Client {
 })
 export class ClientCrudComponent implements OnInit {
 
-  name = new FormControl('', [Validators.required]);
-  cpf = new FormControl('', [Validators.required, CPFValidator.isValidCpf()]);
-  cellphone = new FormControl('', [Validators.required]);
-  birthdate = new FormControl('', [Validators.required]);
-  address = new FormControl('', [Validators.required]);
-  vehicle = new FormControl('', [Validators.required]);
-  id = new FormControl('', [Validators.required])
+  crudForm: FormGroup;
+
+  name = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  cpf = new FormControl('', [Validators.required, CPFValidator.isValidCpf(), Validators.minLength(11), Validators.maxLength(11)]);
+  cellphone = new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]);
+  birthdate = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]);
+  address = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  vehicle = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  id = new FormControl('', [Validators.required, Validators.minLength(36), Validators.maxLength(36)])
 
   selectedVehicle = 'Vehicle Selector'
   brand = ''
@@ -59,12 +61,22 @@ export class ClientCrudComponent implements OnInit {
     public dialogRef: MatDialogRef<ClientCrudComponent>,
     private ngZone: NgZone,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private mainService: AppService
+    private mainService: AppService,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.crudForm = this.fb.group({
+      name: this.name,
+      cpf: this.cpf,
+      cellphone: this.cellphone,
+      birthdate: this.birthdate,
+      address: this.address,
+      vehicle: this.vehicle,
+      id: this.id
+    });
+
     if (this.data.hasOwnProperty('client')) {
-      console.log('data: ', this.data)
       this.name.setValue(this.data['client']['name'])
       this.cpf.setValue(this.data['client']['cpf'])
       this.cellphone.setValue(this.data['client']['cellphone'])
@@ -76,7 +88,9 @@ export class ClientCrudComponent implements OnInit {
     } else this.crudType = 'new'
 
     this.clientList = localStorage.getItem('clientList') ? JSON.parse(localStorage.getItem('clientList')) : []
-    console.log('clientList: ', this.clientList)
+
+    this.id.setValue(this.crudType == 'new' ? UUIDGenerator.generateUUID() : this.data['client']['id'])
+
     this.mainService.get_brands().subscribe({
       next: v => this.brands = v,
       error: e => console.log('error: ', e)
@@ -113,9 +127,7 @@ export class ClientCrudComponent implements OnInit {
       this.clientList = this.clientList.filter(f => f['id'] != this.data['client']['id'])
     }
 
-    this.id.setValue(this.crudType == 'new' ? UUIDGenerator.generateUUID() : this.data['client']['id'])
-
-    if (this.name.valid && this.cpf.valid && this.cellphone.valid && this.birthdate.valid && this.address.valid && this.vehicle.valid && this.id.valid) {
+    if (this.crudForm.valid) {
       let client = {
         name: this.name.value,
         cpf: this.cpf.value,

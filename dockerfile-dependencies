@@ -1,0 +1,5 @@
+FROM node AS dependencies
+WORKDIR /build/simple-crud
+ENV PATH="./node_modules/.bin:$PATH" 
+COPY package.json yarn.lock ./
+RUN yarn install

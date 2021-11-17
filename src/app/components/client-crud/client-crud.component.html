@@ -13,7 +13,7 @@
             <!-- CPF -->
             <mat-form-field appearance="outline">
                 <mat-label style="color:ghostwhite">CPF</mat-label>
-                <input id='cpf' mask='000.000.000-00' type="text" matInput [formControl]="cpf"
+                <input id='cpf' mask='000.000.000-00' min="11" type="text" matInput [formControl]="cpf"
                     [errorStateMatcher]="matcher" placeholder="Ex.: 012.345.678-90">
                 <mat-icon matSuffix>badge</mat-icon>
                 <mat-error id='cpf-error-1' *ngIf="cpf.hasError('required')">CPF is <strong>required</strong>
@@ -69,8 +69,7 @@
             (click)='deleteClient()'>DELETE</button>
         <div class='main-actions'>
             <button mat-raised-button color='accent' (click)='dialogRef.close()'>CANCEL</button>
-            <button id='send' mat-raised-button color='primary'
-                [disabled]="name.invalid || cpf.invalid || cellphone.invalid || birthdate.invalid || address.invalid || vehicle.invalid"
+            <button id='send' mat-raised-button color='primary' [disabled]="crudForm.invalid"
                 (click)='send()'>{{crudSend[crudType]}}</button>
         </div>
     </div>
