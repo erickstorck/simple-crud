@@ -15,4 +15,22 @@ To unit tests run `npm run jestTest`
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7.
 
 ## Build
+``` docker
+docker build -f dockerfile-dependencies -t ghcr.io/erickstorck/simple-crud/dependencies:latest .
 
+docker push ghcr.io/erickstorck/simple-crud/dependencies:latest
+
+docker build -f dockerfile -t ghcr.io/erickstorck/simple-crud:latest .
+
+docker push  ghcr.io/erickstorck/simple-crud
+```
+
+* run it locally
+``` docker
+docker run --rm -it -p 80:80 --name simple-crud ghcr.io/erickstorck/simple-crud:latest
+```
+
+* run it 
+``` docker
+docker run --rm -it -p 80:80 --name simple-crud ghcr.io/erickstorck/simple-crud:latest
+```
